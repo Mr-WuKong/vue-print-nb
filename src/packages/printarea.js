@@ -26,6 +26,7 @@ export default class {
     let PrintAreaWindow = this.getPrintWindow(); // 创建iframe
     this.write(PrintAreaWindow.doc); // 写入内容
     this.print(PrintAreaWindow);
+    console.log(this.settings.endCallback)
     this.settings.endCallback();
 
   }

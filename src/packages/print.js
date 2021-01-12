@@ -11,7 +11,7 @@ export default {
 		let closeBtn = true;
 		let id = '';
 		el.addEventListener('click', () => {
-			vue.$nextTick(() => {
+			setTimeout(() => {
 				if (typeof binding.value === 'string') {
 					id = binding.value;
 				} else if (typeof binding.value === 'object' && !!binding.value.id) {
@@ -27,7 +27,7 @@ export default {
 					// 直接全局打印
 					window.print();
 				}
-			});
+			}, 500);
 
 		});
 		const localPrint = () => {
@@ -39,7 +39,8 @@ export default {
 					extraHead: binding.value.extraHead, // 附加在head标签上的额外标签,使用逗号分隔
 					extraCss: binding.value.extraCss, // 额外的css连接，多个逗号分开
 					popTitle: binding.value.popTitle, // title的标题
-					endCallback() { // 调用打印之后的回调事件
+					endCallback: () => {
+						binding.value.endCallback()
 						closeBtn = true;
 					}
 				});
